@@ -1,5 +1,5 @@
 "use client";
-import { TbMessageChatbot } from "react-icons/tb";
+import { RiAiGenerate } from "react-icons/ri";
 import { IoSend } from "react-icons/io5";
 import { useState } from "react";
 import { PostDataApi } from "@/src/utils/fetching";
@@ -55,8 +55,8 @@ export default function Chat() {
   return (
     <main className="bg-gradient-to-tl from-slate-950 via-sky-950 to-gray-950 min-h-screen">
       <header className="text-white bg-gradient-to-t from-slate-950 via-sky-950 to-gray-950 justify-center flex items-center text-xl md:text-3xl space-x-2 p-3 sticky top-0 z-50">
-        <TbMessageChatbot />
-        <h2>Gemini Chat</h2>
+        <RiAiGenerate />
+        <h2>Gemini Generated</h2>
       </header>
 
       <div className="p-2 md:p-3 overflow-y-auto space-y-2 pb-20 md:pb-28">
@@ -80,20 +80,7 @@ export default function Chat() {
         onSubmit={handleSendMessage}
         className="fixed bottom-0 left-0 right-0 p-3 flex items-center"
       >
-        <input
-          type="text"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          placeholder="Type your message..."
-          className="flex-1 text-white p-2 md:p-3 bg-gradient-to-bl from-slate-900 to-gray-900 rounded-full border border-white focus:outline-none"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="ml-2 p-3 bg-gradient-to-bl from-slate-700 via-sky-700 to-gray-700 rounded-full disabled:bg-gray-900"
-        >
-          <IoSend className="text-white" />
-        </button>
+        <p className="text-center">Masih dalam pengembangan</p>
       </form>
     </main>
   );
