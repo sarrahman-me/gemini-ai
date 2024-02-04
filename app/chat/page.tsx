@@ -92,7 +92,7 @@ export default function Chat() {
           disabled={loading}
           className="ml-2 p-3 bg-gradient-to-bl from-slate-700 via-sky-700 to-gray-700 rounded-full disabled:bg-gray-900"
         >
-          <IoSend className="text-white" />
+          <IoSend className="text-white md:text-2xl text-xl" />
         </button>
       </form>
     </main>
