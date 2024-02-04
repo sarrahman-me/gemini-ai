@@ -3,6 +3,7 @@ import { TbMessageChatbot } from "react-icons/tb";
 import { IoSend } from "react-icons/io5";
 import { useState } from "react";
 import { PostDataApi } from "@/src/utils/fetching";
+import formatText from "@/src/utils/formatTextChat";
 
 interface Message {
   role: string;
@@ -51,22 +52,9 @@ export default function Chat() {
     setLoading(false);
   };
 
-  const formatText = (text: string) => {
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    return text.split(boldRegex).map((part, index) => {
-      return index % 2 === 0 ? (
-        <span key={index}>{part}</span>
-      ) : (
-        <strong key={index} className="font-bold">
-          {part}
-        </strong>
-      );
-    });
-  };
-
   return (
     <main className="bg-gradient-to-tl from-slate-950 via-sky-950 to-gray-950 min-h-screen">
-      <header className="text-white justify-center flex items-center text-xl md:text-3xl space-x-2 p-3 border-b border-sky-950">
+      <header className="text-white bg-gradient-to-t from-slate-950 via-sky-950 to-gray-950 justify-center flex items-center text-xl md:text-3xl space-x-2 p-3 sticky top-0 z-50">
         <TbMessageChatbot />
         <h2>Gemini Chat</h2>
       </header>
@@ -76,27 +64,16 @@ export default function Chat() {
           <div
             key={index}
             className={`text-white ${
-              message.role === "model" ? "bg-sky-900" : "bg-gray-900"
+              message.role === "model" ? "bg-sky-950" : "bg-gray-900"
             } rounded-md p-2`}
           >
-            {message.parts.split("\n\n").map((section, sectionIndex) => (
-              <div key={sectionIndex} className="mb-4">
-                {section.split("\n").map((row, rowIndex) => (
-                  <div key={rowIndex} className="mb-2">
-                    {row.trim() &&
-                      (row.includes("**") ? (
-                        // Teks cetak tebal di antara dua **
-                        <>{formatText(row)}</>
-                      ) : (
-                        // Teks biasa
-                        <span>{row}</span>
-                      ))}
-                  </div>
-                ))}
-              </div>
-            ))}
+            {formatText(message.parts)}
           </div>
         ))}
+
+        <div className={`${!loading ? "hidden" : "p-2 md:p-3 text-white"}`}>
+          Tunggu Sebentar ...
+        </div>
       </div>
 
       <form
