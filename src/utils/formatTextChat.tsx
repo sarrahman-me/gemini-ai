@@ -1,6 +1,31 @@
 import React, { ReactNode } from "react";
 
 const formatTextSection = (text: string) => {
+  const tableRegex = /\|(.*)\|/g;
+
+  if (text.match(tableRegex)) {
+    // Jika terdapat format tabel, konversi ke elemen tabel
+    const rows = text.split("\n").map((row, rowIndex) => (
+      <tr key={rowIndex}>
+        {row
+          .replace(/^\|/, "") // Hapus karakter | di awal baris
+          .replace(/\|$/, "") // Hapus karakter | di akhir baris
+          .split("|")
+          .map((cell, cellIndex) => (
+            <td key={cellIndex} className="border px-4 py-2">
+              {cell.trim()}
+            </td>
+          ))}
+      </tr>
+    ));
+
+    return [
+      <table key="table" className="border-collapse border">
+        <tbody key="tbody">{rows}</tbody>
+      </table>,
+    ];
+  }
+
   return text.split("\n\n").map((section, sectionIndex) => (
     <div key={sectionIndex} className="mb-4">
       {section.split("\n").map((row, rowIndex) => (
