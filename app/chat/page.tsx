@@ -51,6 +51,19 @@ export default function Chat() {
     setLoading(false);
   };
 
+  const formatText = (text: string) => {
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    return text.split(boldRegex).map((part, index) => {
+      return index % 2 === 0 ? (
+        <span key={index}>{part}</span>
+      ) : (
+        <strong key={index} className="font-bold">
+          {part}
+        </strong>
+      );
+    });
+  };
+
   return (
     <main className="bg-gradient-to-tl from-slate-950 via-sky-950 to-gray-950 min-h-screen">
       <header className="text-white justify-center flex items-center text-xl md:text-3xl space-x-2 p-3 border-b border-sky-950">
@@ -66,7 +79,22 @@ export default function Chat() {
               message.role === "model" ? "bg-sky-900" : "bg-gray-900"
             } rounded-md p-2`}
           >
-            {message.parts}
+            {message.parts.split("\n\n").map((section, sectionIndex) => (
+              <div key={sectionIndex} className="mb-4">
+                {section.split("\n").map((row, rowIndex) => (
+                  <div key={rowIndex} className="mb-2">
+                    {row.trim() &&
+                      (row.includes("**") ? (
+                        // Teks cetak tebal di antara dua **
+                        <>{formatText(row)}</>
+                      ) : (
+                        // Teks biasa
+                        <span>{row}</span>
+                      ))}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         ))}
       </div>
