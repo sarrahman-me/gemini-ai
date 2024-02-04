@@ -3,7 +3,7 @@ import { RiAiGenerate } from "react-icons/ri";
 
 export default function Home() {
   return (
-    <main className="bg-gradient-to-tl from-sky-950 via-blue-950 to-indigo-950 h-screen">
+    <main className="bg-gradient-to-tl from-slate-950 via-sky-950 to-gray-950 h-screen">
       <div className="text-center py-10 pt-20">
         <h1 className="font-bold text-4xl md:text-8xl bg-gradient-to-r from-indigo-400 via-cyan-400 to-amber-400 inline-block text-transparent bg-clip-text">
           Gemini Pro
@@ -48,7 +48,7 @@ const CardFeature = ({
   description: string;
 }) => {
   return (
-    <div className="text-white border space-y-3 border-white bg-gradient-to-br from-sky-900 via-blue-900 to-indigo-900 w-full rounded-md p-2 hover:from-sky-800 hover:via-blue-800 hover:to-indigo-800 transition ease-linear cursor-pointer">
+    <div className="text-white border space-y-3 border-white bg-gradient-to-bl from-slate-900 to-gray-900 w-full rounded-md p-2 hover:via-sky-950 transition-colors ease-linear cursor-pointer">
       <div className="flex items-center space-x-2">
         <div className="text-2xl">{icon}</div>
         <h3 className="text-sm md:text-base">{title}</h3>
